@@ -16,11 +16,9 @@ int	ft_atoi(char *s)
 {
 	int	i;
 	int	sign;
-	int	units;
 	int	nbr;
 
 	i = 0;
-	units = 1;
 	sign = 1;
 	if (!s)
 		return (-444);
@@ -32,8 +30,7 @@ int	ft_atoi(char *s)
 	}
 	while (ft_is_digit(s[i]))
 	{
-		nbr = units * nbr + (s[i] + 48); 
-		units *= 10;
+		nbr = 10 * nbr + (s[i] - 48); 
 		i++;
 	}
 	return (nbr * sign);
@@ -44,15 +41,15 @@ void	ft_putnbr(int nbr)
 	long nbr_long;
 	char c;
 
-	nbr_long = (long) nbr;
+	nbr_long = (long)nbr;
 	if (nbr < 0)
 	{
 		write(1, "-", 1);
 		nbr_long *= -1;
 	}
-	if (nbr_long < 9)
+	if (nbr_long <= 9)
 	{
-		c = nbr_long - 48;
+		c = nbr_long + 48;
 		write(1, &c, 1);
 	}
 	else
@@ -80,8 +77,8 @@ int	is_prime(int nbr)
 		i++;
 	}
 	if (flag)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 // https://www.simplilearn.com/tutorials/c-tutorial/c-program-for-prime-numbers
@@ -93,6 +90,7 @@ void error(void)
 	write(1, "\n", 1);
 }
 
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	int	i;
@@ -114,5 +112,6 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	ft_putnbr(sum);
+	write(1, "\n", 1);
 	return (0);
 }
